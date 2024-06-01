@@ -23,6 +23,7 @@
   "description": "JnJ Utility Library For Web Scraping(cheerio, puppeteer,...) in Typescript",
   "author": "Jnj Soft Ko <jnjsoft.ko@gmail.com>",
   "dependencies": {
+    "@octokit/rest": "^20.1.1",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "jnj-lib-base": "^0.0.5",

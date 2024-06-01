@@ -12,9 +12,7 @@ const querySelectorAll = ($root: any, selector: string) => {
 
 // *
 const querySelector = ($root: any, selector: string) => {
-  return $root instanceof Function
-    ? $root(selector).eq(0)
-    : $root.find(selector).eq(0);
+  return $root instanceof Function ? $root(selector).eq(0) : $root.find(selector).eq(0);
 };
 
 // *
@@ -73,8 +71,7 @@ const getValues = ($root: any, selector: string, target?: string) => {
 };
 
 // *
-const getOuterHtml = ($: any, selector: string) =>
-  $.html(querySelector($, selector));
+const getOuterHtml = ($: any, selector: string) => $.html(querySelector($, selector));
 
 // *
 const getValueFromStr = (str: string, selector: string, target?: string) => {
@@ -87,8 +84,8 @@ const getValuesFromStr = (str: string, selector: string, target?: string) => {
 };
 
 // * settings = [{'key': '', 'selector': '', 'target': ''}]
-const dictFromRoot = ($root: any, settings = []) => {
-  let dict = {};
+const dictFromRoot = ($root: any, settings: any[] = []) => {
+  let dict: any = {};
   for (let setting of settings) {
     if (!setting.selector) {
       continue;
