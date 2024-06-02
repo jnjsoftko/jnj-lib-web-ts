@@ -1,3 +1,4 @@
+export { requestGet, requestPost, requestPatch, requestDelete, requestUpsert, requestGql } from "./request.js";
 export {
   cheerFromStr,
   cheerFromFile,

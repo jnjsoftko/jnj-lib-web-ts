@@ -11,8 +11,12 @@ vite.config.ts.timestamp-*
 # build
 build/
 dist/
-cjs/
-esm/
+cjs/*
+!tsconfig.json
+!package.json
+esm/*
+!tsconfig.json
+!package.json
 
 # folders
 package/
@@ -25,3 +29,7 @@ _*/
 .env
 .env.*
 !.env.example
+
+# exceptions
+!tsconfig.json
+!package.json
