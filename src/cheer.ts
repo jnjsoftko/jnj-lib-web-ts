@@ -100,7 +100,8 @@ const dictFromRoot = ($root: any, settings: any[] = []) => {
 const dictsFromRoots = ($roots: any[], settings = [], required = []) => {
   let dicts = [];
   for (let i = 0; i < $roots.length; i++) {
-    let $root = $roots.eq(i);
+    let $root = $roots[i];
+    // let $root = $roots.eq(i);
     let dict = dictFromRoot($root, settings);
     if (!dict) continue;
     let notPush = false;
