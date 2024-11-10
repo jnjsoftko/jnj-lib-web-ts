@@ -111,7 +111,7 @@ class Chrome {
    }
 
 
-   async getFullScreenshot() {
+   async _getFullScreenshot() {
        try {
            // 페이지 전체 크기 가져오기
            const { width, height } = await this.getFullSize();
@@ -131,11 +131,23 @@ class Chrome {
        }
    }
 
+   async getFullScreenshot() {
+       try {
+           return await this._getFullScreenshot();
+       } finally {
+           this.close();
+       }
+   }
+
 
    async saveScreenshot(path: string) {
-       const image = await this.getFullScreenshot();
-       fs.writeFileSync(path, image, 'base64');
-   }
+        try {
+            const image = await this._getFullScreenshot();
+            fs.writeFileSync(path, image, 'base64');
+        } finally {
+            this.close();
+        }
+    }
 
 
    async goto(url: string) {
@@ -181,3 +193,16 @@ export { Chrome };
 // const image = await ch.getFullScreenshot();
 // fs.writeFileSync('./screenshot.png', image, 'base64');
 
+// * selenium get source, find element
+
+// driver.page_source
+
+// element_Source = driver.find_element("id","entry_213259").get_attribute("outerHTML")
+// print(element_Source)
+
+// selenium click, get text, get attribute, get screenshot, save screenshot
+// await submitButton.click();
+
+// let inputField = await driver.findElement(By.name('no_type'));
+// let value = await inputField.getAttribute('value');
+// console.log(value);
