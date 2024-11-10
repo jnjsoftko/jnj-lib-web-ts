@@ -45,7 +45,7 @@ class Chrome {
        if (options.headless) {
            chromeOptions.addArguments('--headless');
        }
-       const profileName = options.profileName ?? getProfileByEmail(options.email) ?? null;
+       const profileName = options.profileName ?? getProfileByEmail(options.email, options.userDataDir) ?? null;
 
 
        // 프로필 설정
