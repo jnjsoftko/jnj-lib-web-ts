@@ -56,12 +56,20 @@ class Chrome {
            chromeOptions.addArguments(`--profile-directory=${profileName}`);
        }
 
+       // 기본 인자
+       const defaultArguments = [
+           '--disable-gpu',
+           '--no-sandbox',
+           '--disable-dev-shm-usage',
+           '--remote-debugging-port=9222'
+       ];
 
-       // 추가 옵션 설정
-       if (options.arguments) {
-           options.arguments.forEach(arg => chromeOptions.addArguments(arg));
-       }
-      
+       // 기본 인자와 사용자 지정 인자를 합치기
+       const finalArguments = [...defaultArguments, ...(options.arguments || [])];
+       
+       // 최종 인자 설정
+       finalArguments.forEach(arg => chromeOptions.addArguments(arg));
+
        // 드라이버 초기화
        this.driver = new Builder()
            .forBrowser('chrome')
