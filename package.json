@@ -29,6 +29,7 @@
     "jnj-lib-base": "^0.0.5",
     "puppeteer": "^20.9.0",
     "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "selenium-webdriver": "^4.26.0"
   }
 }
