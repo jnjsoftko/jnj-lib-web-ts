@@ -13,4 +13,4 @@ export {
   dictFromRoot, // convert string format
   dictsFromRoots,
 } from "./cheer.js";
-export {Chrome}  from "./chrome.js";
+export { Chrome }  from "./chrome.js";
