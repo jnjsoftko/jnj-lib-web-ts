@@ -21,7 +21,10 @@ const loadJson = (filePath: string) => {
 
 
 // 프로필 찾기
-const getProfileByEmail = (email = 'bigwhitekmc@gmail.com', userDataDir = "/Users/youchan/Library/Application Support/Google/Chrome") => {
+const getProfileByEmail = (email = 'bigwhitekmc@gmail.com', userDataDir = undefined) => {
+    if (!userDataDir) {
+        return null;
+    }
    const folders = findFolders(userDataDir, 'Profile');
     for (const folder of folders) {
      const json = loadJson(`${userDataDir}/${folder}/Preferences`);
@@ -38,7 +41,7 @@ const getProfileByEmail = (email = 'bigwhitekmc@gmail.com', userDataDir = "/User
 class Chrome {
    private driver: WebDriver;
 
-   constructor(options = {headless: true, profileName: undefined, email: undefined, userDataDir: "C:/Users/Jungsam/AppData/Local/Google/Chrome/User Data", arguments: []}) {
+   constructor(options = {headless: true, profileName: undefined, email: undefined, userDataDir: undefined, arguments: []}) {
        const chromeOptions = new chrome.Options();
       
        // 기본 옵션 설정
@@ -46,7 +49,6 @@ class Chrome {
            chromeOptions.addArguments('--headless');
        }
        const profileName = options.profileName ?? getProfileByEmail(options.email, options.userDataDir) ?? null;
-
 
        // 프로필 설정
        if (profileName) {
