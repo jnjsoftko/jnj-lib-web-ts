@@ -172,6 +172,127 @@ class Chrome {
            }
        }
    }
+
+    // 요소 찾기
+    async _findElements(by: string, value: string) {
+        switch(by.toLowerCase()) {
+            case 'id':
+                return await this.driver.findElements(By.id(value));
+            case 'name':
+                return await this.driver.findElements(By.name(value));
+            case 'css':
+                return await this.driver.findElements(By.css(value));
+            case 'xpath':
+                return await this.driver.findElements(By.xpath(value));
+            default:
+                throw new Error(`지원하지 않는 선택자 타입: ${by}`);
+        }
+    }
+
+    // 요소 찾기(css)
+    async findElements(value: string) {
+        return await this.driver.findElements(By.css(value));
+    }
+
+   // 요소 찾기
+   async _findElement(by: string, value: string) {
+       switch(by.toLowerCase()) {
+           case 'id':
+               return await this.driver.findElement(By.id(value));
+           case 'name':
+               return await this.driver.findElement(By.name(value));
+           case 'css':
+               return await this.driver.findElement(By.css(value));
+           case 'xpath':
+               return await this.driver.findElement(By.xpath(value));
+           default:
+               throw new Error(`지원하지 않는 선택자 타입: ${by}`);
+       }
+   }
+
+    // 요소 찾기(css)
+    async findElement(value: string) {
+        return await this.driver.findElement(By.css(value));
+    }
+
+
+   // 페이지 소스 가져오기
+   async getPageSource() {
+       return await this.driver.getPageSource();
+   }
+
+   // 요소의 HTML 가져오기
+   async _getElementHtml(by: string, value: string) {
+       const element = await this._findElement(by, value);
+       return await element.getAttribute('outerHTML');
+   }
+
+   // 요소의 HTML 가져오기
+    async getElementHtml(value: string) {
+        return await (await this.findElement(value)).getAttribute('outerHTML');
+    }
+
+   // 요소 클릭
+   async _click(by: string, value: string) {
+       const element = await this._findElement(by, value);
+       await element.click();
+   }
+
+    // 요소 클릭
+    async click(value: string) {
+        const element = await this.findElement(value);
+        await element.click();
+    }
+
+   // 요소의 텍스트 가져오기
+   async _getText(by: string, value: string) {
+       const element = await this._findElement(by, value);
+       return await element.getText();
+   }
+
+   // 요소의 텍스트 가져오기
+   async getText(value: string) {
+    const element = await this.findElement(value);
+    return await element.getText();
+}
+
+   // 요소의 속성 가져오기
+   async _getAttribute(by: string, value: string, attribute: string) {
+       const element = await this._findElement(by, value);
+       return await element.getAttribute(attribute);
+   }
+
+   // 요소의 속성 가져오기
+   async getAttribute(value: string, attribute: string) {
+       const element = await this.findElement(value);
+       return await element.getAttribute(attribute);
+   }
+
+   // 요소에 텍스트 입력하기
+   async _sendKeys(by: string, value: string, text: string) {
+       const element = await this._findElement(by, value);
+       await element.sendKeys(text);
+   }
+
+   // 요소에 텍스트 입력하기
+   async sendKeys(value: string, text: string) {
+       const element = await this.findElement(value);
+       await element.sendKeys(text);
+   }
+
+   // 특정 요소의 스크린샷 저장
+   async _saveElementScreenshot(by: string, value: string, path: string) {
+       const element = await this._findElement(by, value);
+       const image = await element.takeScreenshot();
+       fs.writeFileSync(path, image, 'base64');
+   }
+
+   // 특정 요소의 스크린샷 저장
+   async saveElementScreenshot(value: string, path: string) {
+       const element = await this.findElement(value);
+       const image = await element.takeScreenshot();
+       fs.writeFileSync(path, image, 'base64');
+   }
 }
 
 export { Chrome };
