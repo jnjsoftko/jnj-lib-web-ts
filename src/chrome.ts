@@ -74,7 +74,7 @@ class Chrome {
        // 전체 너비 가져오기
        const fullWidth = await this.driver.executeScript(
            'return document.body.parentNode.scrollWidth'
-       );
+       ) as number;
 
 
        // 전체 높이 계산을 위한 스크롤
@@ -87,7 +87,7 @@ class Chrome {
 
            const currentHeight = await this.driver.executeScript(
                'return document.body.scrollHeight'
-           );
+           ) as number;
 
 
            if (currentHeight === fullHeight) {
